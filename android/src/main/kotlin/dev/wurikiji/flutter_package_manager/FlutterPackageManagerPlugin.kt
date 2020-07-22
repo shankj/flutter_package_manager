@@ -17,6 +17,7 @@ import io.flutter.plugin.common.MethodChannel.Result
 import io.flutter.plugin.common.PluginRegistry.Registrar
 import org.json.JSONArray
 import java.io.ByteArrayOutputStream
+import java.io.File
 import java.lang.Exception
 
 
@@ -89,6 +90,8 @@ class FlutterPackageManagerPlugin: MethodCallHandler {
       info!!["packageName"] = appInfo?.packageName
       info["appName"] = appName
       info["appIcon"] = byteImage
+      info["path"] = appInfo?.sourceDir
+      info["size"] = File(appInfo?.sourceDir).length()
     } catch (e: Exception) {
       Log.i(TAG, "$packageName not installed: $e")
         info = null
